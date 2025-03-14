@@ -107,3 +107,10 @@ deploy:
   type: git
   repository: https://github.com/wksgl/wksgl.github.io.git
   branch: main
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+  limit: 10000
