@@ -102,5 +102,5 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repository: github.com:wksgl/wksgl.github.io.git
+  repository: https://github.com/wksgl/wksgl.github.io.git
   branch: main
