@@ -143,7 +143,7 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: /images/avatar.png
+  url: /images/tou.jpg
   # If true, the avatar will be displayed in circle.
   rounded: true
   # If true, the avatar will be rotated with the cursor.
@@ -284,7 +284,7 @@ follow_me:
   #Twitter: https://twitter.com/username || fab fa-twitter
   #Telegram: https://t.me/channel_name || fab fa-telegram
   #WeChat: /images/wechat_channel.png || fab fa-weixin
-  RSS: /atom.xml || fa fa-rss
+  #RSS: /atom.xml || fa fa-rss
 
 # Related popular posts
 # Dependencies: https://github.com/sergeyzwezdin/hexo-related-posts
@@ -372,7 +372,7 @@ codeblock:
     dark: prism-dark
   # Add copy button on codeblock
   copy_button:
-    enable: false
+    enable: true
     # Available values: default | flat | mac
     style:
   # Fold code block
