@@ -120,10 +120,6 @@ math:
   exclude: false
 
 
-
-
-
-
 # markdown 渲染引擎配置
 # 默认是hexo-renderer-marked
 # 当前为hexo-renderer-markdown-it

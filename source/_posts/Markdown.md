@@ -3,9 +3,14 @@ title: Markdown语法学习
 date: 2025-03-15 12:45:51
 tags:
   - 写作
-
 mathjax: true
 ---
+
+::: tips
+Markdown学习笔记
+:::
+<!--more-->
+
 ### 一、基本语法： 
 1. #### **标题**  
 #一级标题（双空格回车换行）  
@@ -87,7 +92,7 @@ mathjax: true
 
 
 
-
+[教程网址]:https://markdown.com.cn/intro.html
 [^1]:这是一个脚注
 
 
