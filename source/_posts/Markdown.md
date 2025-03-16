@@ -56,20 +56,20 @@ Markdown学习笔记
    - `nano` ```使用` `制造代码块```
    - 多个``可实现嵌套
    - 三个```可实现代码块
-   - 
+  
 7. #### **脚注**
     这是脚注[^1] 
 
 8. #### **超链接**
     - 直接跳转：https://markdown.com.cn/intro.html
     - 文字链接：[点击链接](https://markdown.com.cn/intro.html)```使用方式：[链接名称](链接地址)```
-     引用链接（用于多次使用的情况）：[教程][教程网址]  
+    - 引用链接（用于多次使用的情况）：[教程][教程网址]  
      ```使用方式：[教程][教程网址]  ```
      ```[教程网址]:https://markdown.com.cn/intro.html "这是教程网址"  ```
 
 9. #### **图片**
     - 使用网络上的图片地址:![图片](https://img.shetu66.com/2023/06/29/1688021713042933.png "网络上的图片")
-    - 使用本地图片:[![本地图片](../images/back.jpg "这是本地图片")](https://markdown.com.cn/intro.html)
+    - 使用本地图片:[![本地图片](/images/back.jpg "这是本地图片")](https://markdown.com.cn/intro.html)
     - html语言加载图片
 
 
