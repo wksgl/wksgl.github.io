@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>LaTex渲染问题</title>
+    <url>/2025/03/15/latex%E6%B8%B2%E6%9F%93%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<div class="tips">
+<p>关于LaTex在hexo上的渲染问题</p>
+</div>
+<span id="more"></span>
+<h2 id="引言">引言</h2>
+<p>笔者在记录Markdown学习笔记时发现，在本地预览正常显示的LaTex公式上传到博客时渲染出错。原因是Hexo 默认搭配的 Markdown 渲染器是 <strong>hexo-renderer-marked</strong>，但其支持的渲染格式有限，不利于自由写作。<br>
+经过查找资料发现 <strong>hexo-renderer-markdown-it</strong> 渲染器能够解决这个问题，并提供更多插件帮助用户更优雅地进行写作</p>
+<h3 id="渲染器安装">渲染器安装</h3>
+<ol>
+<li class="lvl-3">
+<h4 id="首先卸载原有渲染器">首先卸载原有渲染器:</h4>
+</li>
+</ol>
+<p><code>npm un hexo-renderer-marked --save</code></p>
+<ol start="2">
+<li class="lvl-3">
+<h4 id="安装新的渲染器">安装新的渲染器:</h4>
+</li>
+</ol>
+<p><code>npm i hexo-renderer-markdown-it --save </code></p>
+<h3 id="文件配置及插件安装">文件配置及插件安装</h3>
+<ol>
+<li class="lvl-3">
+<h4 id="找到Hexo的配置文件-config-yml，并将以下代码添加到配置文件底部">找到Hexo的配置文件_config.yml，并将以下代码添加到配置文件底部:</h4>
+</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">markdown:</span></span><br><span class="line">  <span class="attr">preset:</span> <span class="string">&quot;default&quot;</span></span><br><span class="line">  <span class="attr">render:</span></span><br><span class="line">    <span class="attr">html:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">xhtmlOut:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">langPrefix:</span> <span class="string">&quot;language-&quot;</span></span><br><span class="line">    <span class="attr">breaks:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">linkify:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">typographer:</span> <span class="literal">true</span></span><br><span class="line">    <span class="attr">quotes:</span> <span class="string">&quot;“”‘’&quot;</span></span><br><span class="line">  <span class="attr">enable_rules:</span></span><br><span class="line">  <span class="attr">disable_rules:</span></span><br><span class="line">  <span class="attr">plugins:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-abbr</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-cjk-breaks</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-deflist</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-emoji</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-footnote</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-ins</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-mark</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-sub</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-sup</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-checkbox</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-imsize</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">markdown-it-expandable</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">markdown-it-container</span></span><br><span class="line">      <span class="attr">options:</span> <span class="string">success</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">markdown-it-container</span></span><br><span class="line">      <span class="attr">options:</span> <span class="string">tips</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">markdown-it-container</span></span><br><span class="line">      <span class="attr">options:</span> <span class="string">warning</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">markdown-it-container</span></span><br><span class="line">      <span class="attr">options:</span> <span class="string">danger</span></span><br><span class="line">  <span class="attr">anchors:</span></span><br><span class="line">    <span class="attr">level:</span> <span class="number">2</span></span><br><span class="line">    <span class="attr">collisionSuffix:</span> <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="attr">permalink:</span> <span class="literal">false</span></span><br><span class="line">    <span class="attr">permalinkClass:</span> <span class="string">&quot;header-anchor&quot;</span></span><br><span class="line">    <span class="attr">permalinkSide:</span> <span class="string">&quot;left&quot;</span></span><br><span class="line">    <span class="attr">permalinkSymbol:</span> <span class="string">&quot;¶&quot;</span></span><br><span class="line">    <span class="attr">case:</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">separator:</span> <span class="string">&quot;-&quot;</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<h4 id="插件安装及使用">插件安装及使用</h4>
+<ol>
+<li class="lvl-7">
+<h5 id="使用如下命令安装3个插件">使用如下命令安装3个插件:</h5>
+ <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm i markdown-it-checkbox</span><br><span class="line">npm i markdown-it-imsize</span><br><span class="line">npm i markdown-it-expandable</span><br></pre></td></tr></table></figure>
+<p>其他插件渲染器自带，无需安装</p>
+</li>
+<li class="lvl-6">
+<h5 id="markdown-it-imsize-自定义图片宽高">markdown-it-imsize:自定义图片宽高</h5>
+<p><code>![test](image.png =100x200)</code></p>
+</li>
+<li class="lvl-6">
+<h5 id="markdown-it-expandable：折叠-展开内容">markdown-it-expandable：折叠/展开内容</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">+++ **点击折叠**  </span><br><span class="line">这是被隐藏的内容</span><br><span class="line">+++</span><br></pre></td></tr></table></figure>
+<p>效果:</p>
+<details open>
+<summary><span class="pre-summary">&nbsp;</span><strong>点击折叠</strong></summary><p>这是被隐藏的内容</p>
+</details>
+</li>
+<li class="lvl-6">
+<h5 id="markdown-it-container：自定义容器">markdown-it-container：自定义容器</h5>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">:::tips</span><br><span class="line">**提示**  </span><br><span class="line">这是一个提示</span><br><span class="line">:::</span><br><span class="line"></span><br><span class="line">:::warning</span><br><span class="line">**注意**</span><br><span class="line">这是一个警告  </span><br><span class="line">:::</span><br><span class="line"></span><br><span class="line">::: danger</span><br><span class="line">**警告**</span><br><span class="line">这是一个危险信号</span><br><span class="line">:::</span><br><span class="line"></span><br><span class="line">::: success</span><br><span class="line">**成功**</span><br><span class="line">这是一个成功信号</span><br><span class="line">:::  </span><br></pre></td></tr></table></figure>
+<p>效果:</p>
+<div class="tips">
+<p><strong>提示</strong><br>
+这是一个提示</p>
+</div>
+<div class="warning">
+<p><strong>注意</strong><br>
+这是一个警告</p>
+</div>
+<div class="danger">
+<p><strong>警告</strong><br>
+这是一个危险信号</p>
+</div>
+<div class="success">
+<p><strong>成功</strong><br>
+这是一个成功信号</p>
+</div>
+<p>自定义容器还需要在 Hexo 的主题下的控制 Markdown 渲染样式文件中配置如下 CSS 内容：（否则不会显示背景色填充效果）:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.tips</span> &#123;</span><br><span class="line"><span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line"><span class="attribute">background-color</span> rgba(<span class="number">52</span>,<span class="number">152</span>,<span class="number">219</span>,.<span class="number">3</span>);</span><br><span class="line"><span class="attribute">border-left</span> <span class="number">4px</span> solid rgb(<span class="number">52</span>,<span class="number">152</span>,<span class="number">219</span>);</span><br><span class="line"><span class="attribute">color</span>: <span class="built_in">darken</span>(<span class="built_in">rgb</span>(<span class="number">52</span>,<span class="number">152</span>,<span class="number">219</span>),<span class="number">20%</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.success</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span> rgba(<span class="number">46</span>,<span class="number">204</span>,<span class="number">113</span>,.<span class="number">3</span>);</span><br><span class="line">    <span class="attribute">border-left</span> <span class="number">4px</span> solid rgb(<span class="number">46</span>,<span class="number">204</span>,<span class="number">113</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">darken</span>(<span class="built_in">rgb</span>(<span class="number">46</span>,<span class="number">204</span>,<span class="number">113</span>),<span class="number">20%</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.warning</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span> rgba(<span class="number">241</span>,<span class="number">196</span>,<span class="number">15</span>,.<span class="number">3</span>);</span><br><span class="line">    <span class="attribute">border-left</span> <span class="number">4px</span> solid rgb(<span class="number">241</span>,<span class="number">196</span>,<span class="number">15</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">darken</span>(<span class="built_in">rgb</span>(<span class="number">241</span>,<span class="number">196</span>,<span class="number">15</span>),<span class="number">20%</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.danger</span> &#123;</span><br><span class="line">    <span class="attribute">padding-left</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span> rgba(<span class="number">231</span>,<span class="number">76</span>,<span class="number">60</span>,.<span class="number">3</span>);</span><br><span class="line">    <span class="attribute">border-left</span> <span class="number">4px</span> solid rgb(<span class="number">231</span>,<span class="number">76</span>,<span class="number">60</span>);</span><br><span class="line">    <span class="attribute">color</span>: <span class="built_in">darken</span>(<span class="built_in">rgb</span>(<span class="number">231</span>,<span class="number">76</span>,<span class="number">60</span>),<span class="number">20%</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<p>更换完渲染器后LaTex公式就能够正常渲染了</p>
+<h3 id="不更换渲染器的方式">不更换渲染器的方式</h3>
+<p>如果不想更换渲染器，也可以通过引入LaTeX自动渲染脚本实现LaTaX公式渲染（MathJax或KaTeX选其一）。</p>
+<ol>
+<li class="lvl-3">
+<p><strong>引入MathJax自动渲染js</strong><br>
+笔者使用的NexT主题需在配置文件取消source/_data/footer.njk注释，在对应路径建立同名文件，最后在footer.njk文件中添加以下代码:</p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="title class_">MathJax</span> = &#123;</span><br><span class="line">  <span class="attr">tex</span>: &#123;</span><br><span class="line">    <span class="attr">inlineMath</span>: [[<span class="string">&#x27;$&#x27;</span>, <span class="string">&#x27;$&#x27;</span>], [<span class="string">&#x27;\\(&#x27;</span>, <span class="string">&#x27;\\)&#x27;</span>]]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">id</span>=<span class="string">&quot;MathJax-script&quot;</span> <span class="attr">async</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">  <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li class="lvl-3">
+<p><strong>引入KaTeX自动渲染js</strong></p>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;link rel=<span class="string">&quot;stylesheet&quot;</span> href=<span class="string">&quot;https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css&quot;</span> integrity=<span class="string">&quot;sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn&quot;</span> crossorigin=<span class="string">&quot;anonymous&quot;</span>&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">defer</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js&quot;</span> <span class="attr">integrity</span>=<span class="string">&quot;sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05&quot;</span> <span class="attr">crossorigin</span>=<span class="string">&quot;anonymous&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;DOMContentLoaded&quot;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="title function_">renderMathInElement</span>(<span class="variable language_">document</span>.<span class="property">body</span>, &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// customised options</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// • auto-render specific keys, e.g.:</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="attr">delimiters</span>: [</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">              &#123;<span class="attr">left</span>: <span class="string">&#x27;$$&#x27;</span>, <span class="attr">right</span>: <span class="string">&#x27;$$&#x27;</span>, <span class="attr">display</span>: <span class="literal">true</span>&#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">              &#123;<span class="attr">left</span>: <span class="string">&#x27;$&#x27;</span>, <span class="attr">right</span>: <span class="string">&#x27;$&#x27;</span>, <span class="attr">display</span>: <span class="literal">false</span>&#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">              &#123;<span class="attr">left</span>: <span class="string">&#x27;\\(&#x27;</span>, <span class="attr">right</span>: <span class="string">&#x27;\\)&#x27;</span>, <span class="attr">display</span>: <span class="literal">false</span>&#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">              &#123;<span class="attr">left</span>: <span class="string">&#x27;\\[&#x27;</span>, <span class="attr">right</span>: <span class="string">&#x27;\\]&#x27;</span>, <span class="attr">display</span>: <span class="literal">true</span>&#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          ],</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="comment">// • rendering keys, e.g.:</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          throwOnError : <span class="literal">false</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;);</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="注"><em><strong>注:</strong></em></h3>
+<p>Hexo在markdown文章中写LaTeX公式时，有个经典问题就是一些字符会被markdown渲染器误认为是转义符号而被丢失，之后公式引擎再对公式渲染时语义已经改变导致渲染出错，最典型的例子就是换行符<code>\\</code>会被转义成\，导致最终渲染的公式内容不换行。本方式会存在这样的问题，我的应对方法是，针对有可能被转义的公式（如带换行符的），用<code>&lt;span&gt;</code>或者<code>&lt;div&gt;</code>标签将LaTeX公式包裹起来，这样公式内容就不会被markdown渲染器识别为转义字符。注意<code>&lt;span&gt;</code>或<code>&lt;div&gt;</code>标签应该与markdown内容分隔开，最好空出一行然后写标签，标签独占一行，以免被markdown渲染干扰。</p>
+<p>例如，某矩阵公式:</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;bmatrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span>  </span><br></pre></td></tr></table></figure>
+<p>直接这样写会导致渲染异常:</p>
+<p>$$<br>
+\begin{bmatrix}<br>
+a &amp; b \<br>
+c &amp; d<br>
+\end{bmatrix}<br>
+$$</p>
+<p>使用<code>&lt;span&gt;</code>标签包裹:</p>
+<figure class="highlight latex"><table><tr><td class="code"><pre><span class="line">&lt;span&gt;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span></span><br><span class="line"><span class="keyword">\begin</span>&#123;bmatrix&#125;</span><br><span class="line">    a <span class="built_in">&amp;</span> b <span class="keyword">\\</span></span><br><span class="line">    c <span class="built_in">&amp;</span> d</span><br><span class="line"><span class="keyword">\end</span>&#123;bmatrix&#125;</span><br><span class="line"><span class="built_in">$</span><span class="built_in">$</span>  </span><br><span class="line">&lt;/span&gt;</span><br></pre></td></tr></table></figure>
+<p>效果:</p>
+<span>
+$$
+\begin{bmatrix}
+    a & b \\
+    c & d
+\end{bmatrix}
+$$  
+</span>
+<p>可以发现渲染正常。</p>
+]]></content>
+      <tags>
+        <tag>-疑难杂症</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Markdown语法学习</title>
+    <url>/2025/03/15/Markdown/</url>
+    <content><![CDATA[<div class="tips">
+<p>Markdown学习笔记</p>
+</div>
+<span id="more"></span>
+<h3 id="一、基本语法：">一、基本语法：</h3>
+<ol>
+<li class="lvl-3">
+<h4 id="标题"><strong>标题</strong></h4>
+</li>
+</ol>
+<p>#一级标题（双空格回车换行）<br>
+##二级标题<br>
+…(一共六级标题)</p>
+<ol start="2">
+<li class="lvl-3">
+<h4 id="引用"><strong>引用</strong></h4>
+</li>
+</ol>
+<blockquote>
+<p>这是一段引用（&gt;）</p>
+<blockquote>
+<p>这是引用嵌套（&gt;&gt;）</p>
+</blockquote>
+<p>这是换行引用（中间行加一个&gt;）</p>
+</blockquote>
+<ol start="3">
+<li class="lvl-3">
+<h4 id="列表"><strong>列表</strong></h4>
+<ol>
+<li class="lvl-7">
+<h5 id="无序列表"><em><strong>无序列表</strong></em> :</h5>
+</li>
+</ol>
+<ul class="lvl-2">
+<li class="lvl-6">列表1（-加空格）</li>
+</ul>
+<ul class="lvl-2">
+<li class="lvl-6">列表2（*加空格）</li>
+</ul>
+<ul class="lvl-2">
+<li class="lvl-6">列表3 （+加空格）</li>
+</ul>
+<ol start="2">
+<li class="lvl-7">
+<h5 id="任务列表"><em><strong>任务列表</strong></em></h5>
+<ul class="lvl-4">
+<li class="lvl-9"><input type="checkbox" id="checkbox0"><label for="checkbox0">a</label></li>
+<li class="lvl-9"><input type="checkbox" id="checkbox1" checked="true"><label for="checkbox1">b</label></li>
+<li class="lvl-9"><input type="checkbox" id="checkbox2"><label for="checkbox2">c</label></li>
+</ul>
+</li>
+</ol>
+</li>
+<li class="lvl-3">
+<h4 id="表格"><strong>表格</strong></h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">卧推</th>
+<th style="text-align:right">深蹲</th>
+<th style="text-align:center">硬拉</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">100kg</td>
+<td style="text-align:right">100kg</td>
+<td style="text-align:center">120kg</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li class="lvl-3">
+<h4 id="段落"><strong>段落</strong></h4>
+<ul class="lvl-2">
+<li class="lvl-6">分割线 三个*或三个-</li>
+</ul>
+<hr>
+<hr>
+<ul class="lvl-2">
+<li class="lvl-6">字体
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字体</th>
+<th style="text-align:center">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>粗体</strong></td>
+<td style="text-align:center">** **</td>
+</tr>
+<tr>
+<td style="text-align:center"><em>斜体</em></td>
+<td style="text-align:center">* *</td>
+</tr>
+<tr>
+<td style="text-align:center"><em><strong>粗斜体</strong></em></td>
+<td style="text-align:center">***</td>
+</tr>
+<tr>
+<td style="text-align:center"><mark>高亮</mark></td>
+<td style="text-align:center">==</td>
+</tr>
+<tr>
+<td style="text-align:center"><s>删除</s></td>
+<td style="text-align:center">~~ ~~</td>
+</tr>
+<tr>
+<td style="text-align:center"><u>下划线<u></td>
+<td style="text-align:center"><code>&lt;u&gt; &lt;u&gt;</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li class="lvl-3">
+<h4 id="代码"><strong>代码</strong></h4>
+<ul class="lvl-2">
+<li class="lvl-5"><code>nano</code> <code>使用` `制造代码块</code></li>
+<li class="lvl-5">多个``可实现嵌套</li>
+<li class="lvl-5">三个```可实现代码块</li>
+</ul>
+</li>
+<li class="lvl-3">
+<h4 id="脚注"><strong>脚注</strong></h4>
+<p>这是脚注<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></p>
+</li>
+<li class="lvl-3">
+<h4 id="超链接"><strong>超链接</strong></h4>
+<ul class="lvl-2">
+<li class="lvl-6">直接跳转：<a href="https://markdown.com.cn/intro.html">https://markdown.com.cn/intro.html</a></li>
+<li class="lvl-6">文字链接：<a href="https://markdown.com.cn/intro.html">点击链接</a><code>使用方式：[链接名称](链接地址)</code></li>
+<li class="lvl-6">引用链接（用于多次使用的情况）：<a href="https://markdown.com.cn/intro.html">教程</a><br>
+<code>使用方式：[教程][教程网址]  </code><br>
+<code>[教程网址]:https://markdown.com.cn/intro.html &quot;这是教程网址&quot;  </code></li>
+</ul>
+</li>
+<li class="lvl-3">
+<h4 id="图片"><strong>图片</strong></h4>
+<ul class="lvl-2">
+<li class="lvl-6">使用网络上的图片地址:<img data-src="https://img.shetu66.com/2023/06/29/1688021713042933.png" alt="图片" title="网络上的图片"></li>
+<li class="lvl-6">使用本地图片:<a href="https://markdown.com.cn/intro.html"><img data-src="/images/back.jpg" alt="本地图片" title="这是本地图片"></a></li>
+<li class="lvl-6">html语言加载图片</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、进阶操作">二、进阶操作</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<h4 id="插入latex公式"><strong>插入latex公式</strong></h4>
+<ul class="lvl-2">
+<li class="lvl-6">行内显示公式: $f(x)=ax+b$</li>
+<li class="lvl-6">块内显示公式:</li>
+</ul>
+  <span>
+  $$
+  \begin{bmatrix}
+      a & b \\
+      c & d
+  \end{bmatrix}
+  $$  
+  </span>
+</li>
+<li class="lvl-2">
+<h4 id="其他（待探索）">其他（待探索）</h4>
+</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>这是一个脚注 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+]]></content>
+      <tags>
+        <tag>写作</tag>
+      </tags>
+  </entry>
+</search>
